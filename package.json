@@ -1,0 +1,52 @@
+{
+  "name": "personal-commentary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal Commentary \u2014 a private study desk for Scripture, reflection, and writing",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite build --watch & node --watch server/index.ts",
+    "dev:server": "node --watch server/index.ts",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "demo": "./scripts/demo.sh",
+    "install-login-item": "./scripts/install-login-item.sh",
+    "mac-app": "./scripts/build-mac-app.sh",
+    "demo:check": "npm run build && node scripts/demo.ts --check"
+  },
+  "dependencies": {
+    "@fastify/static": "^10.1.5",
+    "@mozilla/readability": "^0.6.0",
+    "@napi-rs/keyring": "^2.1.0",
+    "better-sqlite3": "^13.0.3",
+    "croner": "^10.0.1",
+    "diff-match-patch": "^1.0.5",
+    "fastify": "^5.12.5",
+    "fflate": "^0.8.3",
+    "linkedom": "^0.18.13",
+    "twitter-text": "^3.1.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/lora": "^5.3.0",
+    "@tanstack/react-query": "^5.104.0",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/diff-match-patch": "^1.0.36",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "lucide-react": "^1.49.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}

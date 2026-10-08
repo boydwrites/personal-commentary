@@ -1,0 +1,10 @@
+<!doctype html>
+<!-- Synthetic parser fixture. Self-authored test text, not a captured page or an attributed quotation. -->
+<html><body>
+<h4 id="section-1">1. (1-3) Synthetic section about presence</h4>
+<p class="ew-bible-text">This synthetic verse block must be excluded from the commentary text.</p>
+<p>This self-authored paragraph supplies a long enough section to exercise the parser. Presence is a keyword used by the test assertion, while the section heading establishes that the range includes verse three. None of this text is an actual quotation from a commentary author.</p>
+<h4 id="section-2">2. (4-6) A section outside the requested range</h4>
+<p>This section must not appear when the parser is asked for verse three. Its text is deliberately long enough that the range check, rather than the minimum-length check, is what excludes it.</p>
+<div class="ew-xref-title">Fixture footer.</div>
+</body></html>
