@@ -10,8 +10,6 @@ export const API_HOSTS = new Set([
   "api.openai.com", "www.sefaria.org", "sefaria.org", "api.x.com",
   "github.com", "objects.githubusercontent.com", "release-assets.githubusercontent.com", "raw.githubusercontent.com", "api.github.com",
   "a.openbible.info", "bible.helloao.org", "beta.ourmanna.com", "www.bible.com",
-  // Skip Heitzig's devotionals, through the site's public WordPress API (a JSON endpoint, so not a "page").
-  "connectwithskip.com",
 ]);
 
 let blockedHosts: Set<string> = new Set();

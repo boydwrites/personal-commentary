@@ -12,8 +12,8 @@ interface SeedAuthor {
   biblehub?: string;
   /** Bible Hub chapter-commentary slug (biblehub.com/commentaries/<slug>/<book>/<chapter>.htm). */
   chapter?: string;
-  /** A dedicated gatherer: Enduring Word chapter pages, or Skip Heitzig's devotionals. */
-  gatherer?: "enduringword" | "skip_devos";
+  /** A dedicated gatherer: Enduring Word chapter pages. */
+  gatherer?: "enduringword";
   /** Sites searched for this author's written comment on a passage (articles, columns, sermon texts). */
   web?: string[];
   preferred?: number; // rank
@@ -21,23 +21,23 @@ interface SeedAuthor {
 }
 
 export const SEED_AUTHORS: SeedAuthor[] = [
-  // Preachers, pastors, and popular commentaries (the user's ranking). Scripture itself outranks every voice.
-  { id: "wesley", display_name: "John Wesley", full_identity: "John Wesley (1703–1791), Anglican priest and founder of Methodism", tradition: "post_reformation", hcf: [], chapter: "wes", web: ["wesley.nnu.edu"], preferred: 1 },
-  { id: "billy-graham", display_name: "Billy Graham", full_identity: "Billy Graham (1918–2018), evangelist", tradition: "evangelical", hcf: [], web: ["billygraham.org", "decisionmagazine.com"], preferred: 2 },
-  { id: "spurgeon", display_name: "Charles Spurgeon", full_identity: "Charles Spurgeon (1834–1892), Baptist preacher", tradition: "evangelical", hcf: [], web: ["spurgeon.org"], preferred: 3 },
-  { id: "skip-heitzig", display_name: "Skip Heitzig", full_identity: "Skip Heitzig, pastor of Calvary Church, Albuquerque", tradition: "evangelical", hcf: [], gatherer: "skip_devos", web: ["connectwithskip.com"], preferred: 4 },
-  { id: "matthew-henry", display_name: "Matthew Henry", full_identity: "Matthew Henry (1662–1714), Presbyterian minister", tradition: "post_reformation", hcf: [], biblehub: "Matthew Henry's Concise Commentary", chapter: "mhc", preferred: 5 },
-  { id: "guzik", display_name: "David Guzik", full_identity: "David Guzik, Enduring Word Bible Commentary", tradition: "evangelical", hcf: [], gatherer: "enduringword", preferred: 6 },
-  { id: "franklin-graham", display_name: "Franklin Graham", full_identity: "Franklin Graham, evangelist, president of the Billy Graham Evangelistic Association", tradition: "evangelical", hcf: [], web: ["billygraham.org", "decisionmagazine.com"], preferred: 7 },
-  { id: "clarke", display_name: "Adam Clarke", full_identity: "Adam Clarke (1762–1832), Methodist minister and commentator", tradition: "post_reformation", hcf: [], chapter: "clarke", preferred: 8 },
-  { id: "augustine", display_name: "Augustine of Hippo", full_identity: "Augustine of Hippo (354–430), bishop of Hippo", tradition: "patristic_west", hcf: ["Augustine of Hippo"], preferred: 9 },
-  { id: "aquinas", display_name: "Thomas Aquinas", full_identity: "Thomas Aquinas (1225–1274), Dominican friar", tradition: "medieval", hcf: ["Thomas Aquinas"], preferred: 10 },
-  { id: "gregory-great", display_name: "Gregory the Great", full_identity: "Gregory the Great (c. 540–604), bishop of Rome", tradition: "patristic_west", hcf: ["Gregory the Dialogist"], preferred: 11 },
-  { id: "gregory-nyssa", display_name: "Gregory of Nyssa", full_identity: "Gregory of Nyssa (c. 335–c. 395), bishop, Cappadocian Father", tradition: "patristic_east", hcf: ["Gregory of Nyssa"], preferred: 12 },
-  { id: "gregory-nazianzus", display_name: "Gregory of Nazianzus", full_identity: "Gregory of Nazianzus (c. 329–390), bishop, Cappadocian Father", tradition: "patristic_east", hcf: ["Gregory of Nazianzus"], preferred: 13 },
-  { id: "luther", display_name: "Martin Luther", full_identity: "Martin Luther (1483–1546), reformer", tradition: "reformation", hcf: ["Martin Luther"], preferred: 14, care_note: "Never quote his 1543 anti-Jewish writings approvingly." },
-  { id: "calvin", display_name: "John Calvin", full_identity: "John Calvin (1509–1564), reformer", tradition: "reformation", hcf: ["John Calvin"], preferred: 15 },
-  { id: "rashi", display_name: "Rashi", full_identity: "Rashi (Shlomo Yitzchaki, 1040–1105), French rabbi and commentator", tradition: "jewish", hcf: [], sefaria: "Rashi", preferred: 16 },
+  // Preachers, pastors, and popular commentaries. The ranking is a starting point that the user
+  // reorders in Settings. Scripture itself outranks every voice.
+  { id: "matthew-henry", display_name: "Matthew Henry", full_identity: "Matthew Henry (1662–1714), Presbyterian minister", tradition: "post_reformation", hcf: [], biblehub: "Matthew Henry's Concise Commentary", chapter: "mhc", preferred: 1 },
+  { id: "spurgeon", display_name: "Charles Spurgeon", full_identity: "Charles Spurgeon (1834–1892), Baptist preacher", tradition: "evangelical", hcf: [], web: ["spurgeon.org"], preferred: 2 },
+  { id: "wesley", display_name: "John Wesley", full_identity: "John Wesley (1703–1791), Anglican priest and founder of Methodism", tradition: "post_reformation", hcf: [], chapter: "wes", web: ["wesley.nnu.edu"], preferred: 3 },
+  { id: "guzik", display_name: "David Guzik", full_identity: "David Guzik, Enduring Word Bible Commentary", tradition: "evangelical", hcf: [], gatherer: "enduringword", preferred: 4 },
+  { id: "clarke", display_name: "Adam Clarke", full_identity: "Adam Clarke (1762–1832), Methodist minister and commentator", tradition: "post_reformation", hcf: [], chapter: "clarke", preferred: 5 },
+  { id: "augustine", display_name: "Augustine of Hippo", full_identity: "Augustine of Hippo (354–430), bishop of Hippo", tradition: "patristic_west", hcf: ["Augustine of Hippo"], preferred: 6 },
+  { id: "aquinas", display_name: "Thomas Aquinas", full_identity: "Thomas Aquinas (1225–1274), Dominican friar", tradition: "medieval", hcf: ["Thomas Aquinas"], preferred: 7 },
+  { id: "gregory-great", display_name: "Gregory the Great", full_identity: "Gregory the Great (c. 540–604), bishop of Rome", tradition: "patristic_west", hcf: ["Gregory the Dialogist"], preferred: 8 },
+  { id: "gregory-nyssa", display_name: "Gregory of Nyssa", full_identity: "Gregory of Nyssa (c. 335–c. 395), bishop, Cappadocian Father", tradition: "patristic_east", hcf: ["Gregory of Nyssa"], preferred: 9 },
+  { id: "gregory-nazianzus", display_name: "Gregory of Nazianzus", full_identity: "Gregory of Nazianzus (c. 329–390), bishop, Cappadocian Father", tradition: "patristic_east", hcf: ["Gregory of Nazianzus"], preferred: 10 },
+  { id: "luther", display_name: "Martin Luther", full_identity: "Martin Luther (1483–1546), reformer", tradition: "reformation", hcf: ["Martin Luther"], preferred: 11, care_note: "Never quote his 1543 anti-Jewish writings approvingly." },
+  { id: "calvin", display_name: "John Calvin", full_identity: "John Calvin (1509–1564), reformer", tradition: "reformation", hcf: ["John Calvin"], preferred: 12 },
+  { id: "rashi", display_name: "Rashi", full_identity: "Rashi (Shlomo Yitzchaki, 1040–1105), French rabbi and commentator", tradition: "jewish", hcf: [], sefaria: "Rashi", preferred: 13 },
+  { id: "billy-graham", display_name: "Billy Graham", full_identity: "Billy Graham (1918–2018), evangelist", tradition: "evangelical", hcf: [], web: ["billygraham.org", "decisionmagazine.com"] },
+  { id: "franklin-graham", display_name: "Franklin Graham", full_identity: "Franklin Graham, evangelist, president of the Billy Graham Evangelistic Association", tradition: "evangelical", hcf: [], web: ["billygraham.org", "decisionmagazine.com"] },
   { id: "chrysostom", display_name: "John Chrysostom", full_identity: "John Chrysostom (c. 347–407), archbishop of Constantinople", tradition: "patristic_east", hcf: ["John Chrysostom"] },
   { id: "origen", display_name: "Origen", full_identity: "Origen of Alexandria (c. 185–c. 253)", tradition: "patristic_east", hcf: ["Origen of Alexandria"], care_note: "Some of his teachings were condemned at a later council." },
   { id: "jerome", display_name: "Jerome", full_identity: "Jerome (c. 347–420), priest and translator", tradition: "patristic_west", hcf: ["Jerome"] },
@@ -63,10 +63,10 @@ export const SEED_AUTHORS: SeedAuthor[] = [
 /** Bump when SEED_AUTHORS gains voices or source mappings that existing libraries should receive. */
 const VOICES_VERSION = 2;
 /** Voices added in version 2, placed ahead of the user's earlier preferred list. */
-const VOICES_V2_TOP = ["wesley", "billy-graham", "spurgeon", "skip-heitzig", "matthew-henry", "guzik", "franklin-graham", "clarke"];
+const VOICES_V2_TOP = ["matthew-henry", "spurgeon", "wesley", "guzik", "clarke"];
 
 export const SEED_DOMAINS: [string, "primary" | "context" | "blocked", string?][] = [
-  ...["ccel.org", "www.ccel.org", "newadvent.org", "www.newadvent.org", "sefaria.org", "www.sefaria.org", "biblehub.com", "bookofconcord.org", "www.bookofconcord.org", "clerus.org", "www.clerus.org", "archive.org", "corpusthomisticum.org", "documentacatholicaomnia.eu", "tertullian.org", "spurgeon.org", "www.spurgeon.org", "enduringword.com", "billygraham.org", "decisionmagazine.com", "connectwithskip.com", "wesley.nnu.edu"].map((h) => [h, "primary"] as [string, "primary"]),
+  ...["ccel.org", "www.ccel.org", "newadvent.org", "www.newadvent.org", "sefaria.org", "www.sefaria.org", "biblehub.com", "bookofconcord.org", "www.bookofconcord.org", "clerus.org", "www.clerus.org", "archive.org", "corpusthomisticum.org", "documentacatholicaomnia.eu", "tertullian.org", "spurgeon.org", "www.spurgeon.org", "enduringword.com", "billygraham.org", "decisionmagazine.com", "wesley.nnu.edu"].map((h) => [h, "primary"] as [string, "primary"]),
   ["wikipedia.org", "context", "Can point to sources; never sufficient evidence for an attribution."],
   ...["goodreads.com", "azquotes.com", "brainyquote.com", "quotefancy.com", "quotes.net", "wisdomquotes.com", "pinterest.com", "facebook.com", "instagram.com", "tiktok.com", "x.com", "twitter.com", "reddit.com", "quora.com"].map((h) => [h, "blocked"] as [string, "blocked"]),
   ["studylight.org", "blocked", "Refuses automated requests (403)."],

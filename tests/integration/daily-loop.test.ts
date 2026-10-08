@@ -38,7 +38,6 @@ beforeAll(() => {
     const chapter = url.match(/^https:\/\/biblehub\.com\/commentaries\/(wes|mhc|clarke)\/exodus\/33\.htm$/);
     if (chapter) return new Response(fs.readFileSync(path.join(FIX, `biblehub-${chapter[1]}-exodus-33.htm`)), { headers: { "content-type": "text/html" } });
     if (url === "https://enduringword.com/bible-commentary/exodus-33/") return new Response(fs.readFileSync(path.join(FIX, "enduringword-exodus-33.htm")), { headers: { "content-type": "text/html" } });
-    if (url.startsWith("https://connectwithskip.com/wp-json/wp/v2/devo?")) return new Response(fs.readFileSync(path.join(FIX, "skip-devos-exodus-33-3.json")), { headers: { "content-type": "application/json" } });
     if (url.includes("ourmanna")) return new Response(JSON.stringify({ verse: { details: { reference: "James 1:22" } } }), { headers: { "content-type": "application/json" } });
     throw new Error(`Unexpected network call in tests: ${url}`);
   }) as typeof fetch;
@@ -187,7 +186,7 @@ describe.skipIf(!hasDatasets)("daily loop on Exodus 33:3", async () => {
     expect(g5.status).toBe("done");
     expect(g5.detail).toBe("Matthew Henry, David Guzik, Adam Clarke");
     const search = modelRequests.find((m) => m.body.input[0].content.includes("comment in writing on"))!;
-    expect(search.body.tools[0].filters.allowed_domains).toEqual(expect.arrayContaining(["billygraham.org", "spurgeon.org"]));
+    expect(search.body.tools[0].filters.allowed_domains).toEqual(expect.arrayContaining(["spurgeon.org"]));
     // Scripture outranks every voice in what the model reads.
     const scripturePart = modelRequests.find((m) => m.body.input[0].content.includes("Write the Scripture part"))!.body.input[0].content as string;
     expect(scripturePart.indexOf('kind="cross_reference"')).toBeLessThan(scripturePart.indexOf('author="Matthew Henry"'));

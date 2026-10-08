@@ -61,7 +61,6 @@ globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) =>
   const chapter = url.match(/^https:\/\/biblehub\.com\/commentaries\/(wes|mhc|clarke)\/exodus\/33\.htm$/);
   if (chapter) return html(`biblehub-${chapter[1]}-exodus-33.htm`);
   if (url === "https://enduringword.com/bible-commentary/exodus-33/") return html("enduringword-exodus-33.htm");
-  if (url.startsWith("https://connectwithskip.com/wp-json/wp/v2/devo?")) return Response.json([]);
   if (url === "https://www.bible.com/verse-of-the-day") return new Response("<title>Verse of the Day - Exodus 33:3 - Bible App</title>", { headers: { "content-type": "text/html" } });
   if (url.includes("ourmanna")) return Response.json({ verse: { details: { reference: "Exodus 33:3" } } });
   return new Response("No source fixture is included for this URL in the offline demo.", { status: 404, headers: { "content-type": "text/plain" } });

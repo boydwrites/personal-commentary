@@ -1,8 +1,8 @@
 // Preachers and popular commentaries, gathered deterministically (no model calls here):
-// Bible Hub chapter commentaries (Wesley, Matthew Henry, Clarke), Enduring Word (David Guzik), and Skip Heitzig's devotionals.
+// Bible Hub chapter commentaries (Wesley, Matthew Henry, Clarke) and Enduring Word (David Guzik).
 import { Readability } from "@mozilla/readability";
 import { parseHTML } from "linkedom";
-import { fetchJson, fetchText } from "../fetcher.ts";
+import { fetchText } from "../fetcher.ts";
 import { BOOKS, bookByUsfm } from "../../shared/refs.ts";
 import { htmlToText } from "./gatherers.ts";
 
@@ -146,21 +146,6 @@ export function articleText(html: string): { title: string; text: string } {
   const art = new Readability(document as any).parse();
   const text = htmlToText(art?.content ?? "") || (art?.textContent ?? "").trim();
   return { title: (art?.title ?? "").trim(), text };
-}
-
-// ---------- Skip Heitzig's devotionals ----------
-export async function gatherSkipDevos(r: Range, signal?: AbortSignal): Promise<VoiceText[]> {
-  const b = bookByUsfm(r.book)!;
-  const q = `${b.name} ${r.c1}:${r.v1}`;
-  const posts = await fetchJson<any[]>(`https://connectwithskip.com/wp-json/wp/v2/devo?search=${encodeURIComponent(q)}&per_page=10&_fields=link,title,content`, { cacheDays: 7, signal });
-  const out: VoiceText[] = [];
-  for (const p of Array.isArray(posts) ? posts : []) {
-    const text = htmlToText(p.content?.rendered ?? "");
-    if (!mentionsPassage(text, r)) continue;
-    out.push({ text, url: p.link, locator: q, title: decode(p.title?.rendered ?? "Devotional") });
-    if (out.length >= 2) break;
-  }
-  return out;
 }
 
 export { BOOKS };

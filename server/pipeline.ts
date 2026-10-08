@@ -16,7 +16,7 @@ import { verifyCard, verseMarkerRegex, loadRunExcerpts, dequoteProse, type Excer
 import { stepbibleAvailable, wordsFor, lexicon, occurrences, isContentWord, plainTranslit, type LexEntry } from "./sources/stepbible.ts";
 import { keyUses } from "./words.ts";
 import { normalize } from "../shared/text.ts";
-import { gatherBibleHubChapter, gatherEnduringWord, gatherSkipDevos, type VoiceText } from "./sources/voices.ts";
+import { gatherBibleHubChapter, gatherEnduringWord, type VoiceText } from "./sources/voices.ts";
 import { discoverVoices } from "./discover.ts";
 import { getSecret } from "./secrets.ts";
 import { HttpError } from "./errors.ts";
@@ -578,7 +578,7 @@ async function runResearch(db: DB, runId: string, signal: AbortSignal) {
     set("L", { status: "done", detail: keep.size ? `${keep.size} ${lang === "he" ? "Hebrew" : "Greek"} words` : "No words found for this passage" });
   })();
 
-  // ---- G5: the user's preachers and pastors — chapter commentaries, Enduring Word, devotionals, and searched sites ----
+  // ---- G5: the user's preachers and pastors — chapter commentaries, Enduring Word, and searched sites ----
   const g5 = (async () => {
     set("G5", { status: "running" });
     const voices = preferred.filter((a) => a.biblehub_chapter_slug || a.gatherer || json<string[]>(a.web_domains_json, []).length);
@@ -588,7 +588,6 @@ async function runResearch(db: DB, runId: string, signal: AbortSignal) {
       const jobs: Promise<void>[] = [];
       if (a.biblehub_chapter_slug) jobs.push(gatherBibleHubChapter(range, a.biblehub_chapter_slug, signal).then((ts) => { for (const t of ts) found.push({ a, t, kind: "commentary_page", by: "directory", rights: "public_domain" }); }));
       if (a.gatherer === "enduringword") jobs.push(gatherEnduringWord(range, signal).then((ts) => { for (const t of ts) found.push({ a, t, kind: "commentary_page", by: "directory", rights: "fair_use_excerpt" }); }));
-      if (a.gatherer === "skip_devos") jobs.push(gatherSkipDevos(range, signal).then((ts) => { for (const t of ts) found.push({ a, t, kind: "web_page", by: "directory", rights: "fair_use_excerpt" }); }));
       return jobs;
     });
     // Search only for voices the direct gatherers can't reach.
